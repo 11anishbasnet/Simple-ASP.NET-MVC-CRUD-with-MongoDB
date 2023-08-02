@@ -1,0 +1,37 @@
+﻿@model User
+
+<div class =" container">
+    <h2>Create User</h2>
+    <form asp-action="Create">
+        <div class =" row">
+            <div class="col-md-4 m-2">
+                <div class="row">
+                    <div class="form-group">
+                        <label asp-for="Name">Name:</label>
+                        <input asp-for="Name" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label asp-for="Email">Email:</label>
+                        <input asp-for="Email" class="form-control" />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label asp-for="Address">Address:</label>
+                        <input asp-for="Address" class="form-control" />
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        
+
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button asp-action="Index" class="btn btn-primary">List</button>
+    </form>
+</div>
+

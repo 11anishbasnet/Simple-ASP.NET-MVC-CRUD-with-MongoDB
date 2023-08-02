@@ -1,0 +1,105 @@
+﻿@model User
+
+<div class=" container">
+        <div class=" row">
+
+            
+                <div class="col-md-4 m-2">
+                    <h2>Create User</h2>
+                    <form id="userForm" asp-action="Index">
+                        <input type="hidden" asp-for="Id" id="Id"/>
+                        <div class="row">
+                            <div class="form-group">
+                                <label asp-for="Name">Name:</label>
+                                <input asp-for="Name" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label asp-for="Email">Email:</label>
+                                <input asp-for="Email" class="form-control" />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label asp-for="Address">Address:</label>
+                                <input asp-for="Address" class="form-control" />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mt-2">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+
+                        </div>
+                    </form>
+
+                </div>
+
+
+
+            <div class="col-md-6 m-2">
+                <h2>User List</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        var users = ViewData["Users"] as List<User>;
+                    }
+                    @if (users != null)
+                    {
+                        @foreach (var user in users)
+                        {
+                            <tr>
+                                <td>@user.Name</td>
+                                <td>@user.Email</td>
+                                <td>@user.Address</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-md-4"><a asp-action="Index" asp-route-id="@user.Id"><button class="btn btn-primary">Edit</button></a></div>
+                                        <div class="col-md-4">
+                                            <form asp-action="Delete" asp-route-id="@user.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+</div>
+
+
+<script>
+    console.log("jscalled");
+    // Reset the form after a successful submission
+    function resetForm() {
+        document.getElementById("userForm").reset();
+    }
+
+    // Check if the userForm contains a value for the hidden input "Id"
+    // If it has a value, it means it's an edit scenario, so we reset the form after submission
+    const hiddenId = document.getElementById("Id");
+    if (hiddenId && hiddenId.value !== "") {
+        resetForm();
+    }
+</script>
+
+
