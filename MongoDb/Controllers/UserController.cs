@@ -17,25 +17,6 @@ namespace MongoDb.Controllers
             _userRepository = userRepository;
         }
 
-        public IActionResult Index1()
-        {
-            List<User> users = _userRepository.GetAllUsers();
-            ViewData["Users"] = users;
-            return View();
-        }
-
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(User user)
-        {
-            _userRepository.AddUser(user);
-            return RedirectToAction(nameof(Index));
-        }
-
         public IActionResult Index(string id)
         {
             List<User> users = _userRepository.GetAllUsers();
